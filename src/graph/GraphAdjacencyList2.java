@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import javax.crypto.spec.PSource;
-
 public class GraphAdjacencyList2 {
 
   public static class Node {
@@ -18,7 +16,7 @@ public class GraphAdjacencyList2 {
     }
   }
 
-  HashMap<Integer, Node> nodeLookUp;
+  private HashMap<Integer, Node> nodeLookUp;
 
   GraphAdjacencyList2() {
     nodeLookUp = new HashMap<>();
@@ -74,7 +72,7 @@ public class GraphAdjacencyList2 {
 
     while (!queue.isEmpty()) {
       Node node = queue.poll();
-      if (visited.contains(node)) {
+      if (visited.contains(node.id)) {
         continue;
       }
 
@@ -83,9 +81,7 @@ public class GraphAdjacencyList2 {
       if (node.id == destination.id)
         return true;
 
-      for (Node adjacentNode : node.adjacent) {
-        queue.add(adjacentNode);
-      }
+      queue.addAll(node.adjacent);
     }
 
     return false;
